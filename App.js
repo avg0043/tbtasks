@@ -1,12 +1,20 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { createAppContainer } from 'react-navigation'
+import { createStackNavigator } from 'react-navigation-stack'
+import Home from './src/screens/Home'
+
+const RootStack = createStackNavigator(
+  {
+    Home: Home
+  },
+  {
+    initialRouteName: 'Home'
+  }
+)
+const AppContainer = createAppContainer(RootStack);
 
 const App = () => {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Hello, world!</Text>
-    </View>
-  )
+  return <AppContainer />
 }
 
 export default App

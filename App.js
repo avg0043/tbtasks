@@ -8,7 +8,16 @@ const RootStack = createStackNavigator(
     Home: Home
   },
   {
-    initialRouteName: 'Home'
+    initialRouteName: 'Home',
+    defaultNavigationOptions: {
+      title: 'TB TASKS',
+      headerStyle: {
+        backgroundColor: '#f7287b',
+      },
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      }
+    }
   }
 )
 const AppContainer = createAppContainer(RootStack);

@@ -1,9 +1,35 @@
-import React, { useState } from 'react'
-import { Alert, Button, StyleSheet, TextInput, View } from 'react-native'
+import React, { useCallback ,useState } from 'react'
+import { Button, FlatList, StyleSheet, Text, TextInput, View } from 'react-native'
+
+const Item = ({ name, time, onDelete }) => {
+  return (
+    <View style={{flex: 1, flexDirection: 'row'}}>
+      <Text style={{flex: 2}}>{name} - {time} segundos</Text>
+      <Button title="Eliminar" onPress={onDelete} />
+    </View>
+  );
+}
 
 const Home = () => {
   const [name, onChangeName] = useState('')
   const [time, onChangeTime] = useState('')
+  const [tasks, setTasks] = useState([])
+  const isAddBtnDisabled = !name || !time
+
+  const handleClickAddBtn = useCallback(
+    () => {
+      setTasks([...tasks, { name, time }])
+    },
+    [tasks, name, time]
+  )
+
+  const handleClickDeleteTask = useCallback(
+    index => 
+      e => {
+        setTasks(tasks.filter((_, idx) => idx !== index))
+      },
+      [tasks]
+  )
 
   return (
     <View>
@@ -24,14 +50,21 @@ const Home = () => {
         <View style={styles['taskCreation-addBtn']}>
           <Button
             color='#000000'
-            onPress={() => Alert.alert('Simple Button pressed')}
+            disabled={isAddBtnDisabled}
+            onPress={handleClickAddBtn}
             title="Añadir tarea"
           />
         </View>
       </View>
-      <View>
-
-      </View>
+      {tasks.length > 0 &&
+        <View>
+          <FlatList
+            data={tasks}
+            keyExtractor={(_, index) => index.toString()}
+            renderItem={({ item, index }) => <Item name={item.name} time={item.time} onDelete={handleClickDeleteTask(index)} />}
+          />
+        </View>
+      }
     </View>
   )
 }

@@ -1,5 +1,5 @@
 import React, { useCallback ,useState } from 'react'
-import { Button, FlatList, StyleSheet, Text, TextInput, View } from 'react-native'
+import { Button, FlatList, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 
 const Item = ({ name, time, onDelete }) => {
   return (
@@ -52,14 +52,20 @@ const Home = () => {
           style={styles['taskCreation-time']}
           value={time}
         />
-        <View style={styles['taskCreation-addBtn']}>
-          <Button
-            color="#ffffff"
-            fontWeight="bold"
+        <View style={styles['taskCreation-buttons']}>
+          <TouchableOpacity 
+            style={{backgroundColor: '#c717fb', justifyContent: 'center', borderRadius: 10}}
+            // onPress={handleClickResetBtn}
+          >
+            <Text style={{color: '#ffffff', padding: 8, fontWeight: 'bold'}}>REINICIAR</Text>
+          </TouchableOpacity>
+          <TouchableOpacity 
             disabled={isAddBtnDisabled}
+            style={{backgroundColor: '#194989', justifyContent: 'center', borderRadius: 10}}
             onPress={handleClickAddBtn}
-            title="Añadir"
-          />
+          >
+            <Text style={{color: '#ffffff', padding: 15, fontWeight: 'bold'}}>AÑADIR</Text>
+          </TouchableOpacity>
         </View>
       </View>
       {tasks.length > 0 &&
@@ -90,11 +96,12 @@ const styles = StyleSheet.create({
     marginLeft: 25, 
     marginRight: 25,
     marginTop: 5,
-    padding: 30,
+    padding: 25,
   },
   'taskCreation-name': {
     borderColor: 'gray', 
     borderWidth: 0.5,
+    borderRadius: 10,
     color: '#ffffff', 
     height: 50, 
     paddingLeft: 10
@@ -102,14 +109,16 @@ const styles = StyleSheet.create({
   'taskCreation-time': {
     borderColor: 'gray', 
     borderWidth: 0.5,
+    borderRadius: 10,
     color: '#ffffff',
     height: 50, 
     marginTop: 5,
     paddingLeft: 10
   },
-  'taskCreation-addBtn': {
-    backgroundColor: '#1184f1',
-    marginTop: 10
+  'taskCreation-buttons': {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginTop: 20
   },
   'tasksList': {
     marginLeft: 25, 

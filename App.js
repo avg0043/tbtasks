@@ -10,9 +10,9 @@ const RootStack = createStackNavigator(
   {
     initialRouteName: 'Home',
     defaultNavigationOptions: {
-      title: 'TB TASKS',
+      title: '[TB-TSK]',
       headerStyle: {
-        backgroundColor: '#f7287b',
+        backgroundColor: '#000000',
       },
       headerTitleStyle: {
         fontWeight: 'bold',
@@ -23,7 +23,7 @@ const RootStack = createStackNavigator(
 const AppContainer = createAppContainer(RootStack);
 
 const App = () => {
-  return <AppContainer />
+  return <AppContainer theme="dark" />
 }
 
 export default App
